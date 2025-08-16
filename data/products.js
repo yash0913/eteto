@@ -1,0 +1,277 @@
+export const categories = [
+  { id: 1, name: "Chips", slug: "chips", image: "/colorful-potato-chips.png" },
+  { id: 2, name: "Namkeen", slug: "namkeen", image: "/placeholder-zc3t0.png" },
+  { id: 3, name: "Biscuits", slug: "biscuits", image: "/crispy-biscuits.png" },
+  { id: 4, name: "Sweets", slug: "sweets", image: "/assorted-indian-sweets.png" },
+  { id: 5, name: "Healthy", slug: "healthy", image: "/healthy-snacks-variety.png" },
+]
+
+export const products = [
+  // Chips Category
+  {
+    id: 1,
+    name: "Masala Magic Chips",
+    category: "chips",
+    price: 25,
+    originalPrice: 30,
+    image: "/spicy-masala-chips.png",
+    images: ["/spicy-masala-chips.png", "/spicy-masala-chips-back.png", "/masala-chips-bowl.png"],
+    description:
+      "Crispy potato chips with authentic Indian masala blend. Made with premium potatoes and traditional spices.",
+    ingredients: "Potatoes, Vegetable Oil, Salt, Red Chili Powder, Turmeric, Coriander, Cumin, Garam Masala",
+    weight: "50g",
+    inStock: true,
+    rating: 4.5,
+    reviews: 128,
+    featured: true,
+    tags: ["spicy", "vegetarian", "popular"],
+  },
+  {
+    id: 2,
+    name: "Classic Salted Chips",
+    category: "chips",
+    price: 20,
+    originalPrice: 25,
+    image: "/classic-salted-potato-chips.png",
+    images: ["/classic-salted-chips.png", "/scattered-salted-chips.png"],
+    description: "Simply delicious salted potato chips. Perfect crunch with just the right amount of salt.",
+    ingredients: "Potatoes, Vegetable Oil, Salt",
+    weight: "50g",
+    inStock: true,
+    rating: 4.2,
+    reviews: 95,
+    featured: false,
+    tags: ["classic", "vegetarian"],
+  },
+  {
+    id: 3,
+    name: "Tangy Tomato Chips",
+    category: "chips",
+    price: 25,
+    originalPrice: 30,
+    image: "/placeholder.svg?height=300&width=300",
+    images: ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"],
+    description: "Zesty tomato flavored chips with a perfect balance of tangy and savory taste.",
+    ingredients: "Potatoes, Vegetable Oil, Tomato Powder, Salt, Sugar, Citric Acid, Natural Flavors",
+    weight: "50g",
+    inStock: true,
+    rating: 4.3,
+    reviews: 76,
+    featured: true,
+    tags: ["tangy", "vegetarian"],
+  },
+
+  // Namkeen Category
+  {
+    id: 4,
+    name: "Bhujia Sev",
+    category: "namkeen",
+    price: 35,
+    originalPrice: 40,
+    image: "/placeholder.svg?height=300&width=300",
+    images: ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"],
+    description: "Traditional crispy bhujia made from gram flour and aromatic spices. A classic Indian snack.",
+    ingredients: "Gram Flour, Vegetable Oil, Salt, Red Chili Powder, Turmeric, Asafoetida, Spices",
+    weight: "200g",
+    inStock: true,
+    rating: 4.6,
+    reviews: 156,
+    featured: true,
+    tags: ["traditional", "vegetarian", "spicy"],
+  },
+  {
+    id: 5,
+    name: "Mixture Namkeen",
+    category: "namkeen",
+    price: 40,
+    originalPrice: 45,
+    image: "/placeholder.svg?height=300&width=300",
+    images: ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"],
+    description: "A delightful mix of various crunchy elements including sev, peanuts, and fried lentils.",
+    ingredients: "Gram Flour, Peanuts, Rice Flakes, Lentils, Vegetable Oil, Salt, Spices",
+    weight: "250g",
+    inStock: true,
+    rating: 4.4,
+    reviews: 89,
+    featured: false,
+    tags: ["mixed", "vegetarian", "crunchy"],
+  },
+
+  // Biscuits Category
+  {
+    id: 6,
+    name: "Butter Cookies",
+    category: "biscuits",
+    price: 45,
+    originalPrice: 50,
+    image: "/placeholder.svg?height=300&width=300",
+    images: ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"],
+    description: "Rich and buttery cookies with a melt-in-mouth texture. Perfect with tea or coffee.",
+    ingredients: "Wheat Flour, Butter, Sugar, Salt, Baking Powder, Vanilla Extract",
+    weight: "150g",
+    inStock: true,
+    rating: 4.7,
+    reviews: 203,
+    featured: true,
+    tags: ["sweet", "vegetarian", "premium"],
+  },
+  {
+    id: 7,
+    name: "Digestive Biscuits",
+    category: "biscuits",
+    price: 30,
+    originalPrice: 35,
+    image: "/placeholder.svg?height=300&width=300",
+    images: ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"],
+    description: "Wholesome digestive biscuits made with whole wheat flour. Healthy and delicious.",
+    ingredients: "Whole Wheat Flour, Sugar, Vegetable Oil, Salt, Baking Soda, Malt Extract",
+    weight: "200g",
+    inStock: true,
+    rating: 4.1,
+    reviews: 67,
+    featured: false,
+    tags: ["healthy", "vegetarian", "wholesome"],
+  },
+
+  // Sweets Category
+  {
+    id: 8,
+    name: "Kaju Katli",
+    category: "sweets",
+    price: 120,
+    originalPrice: 140,
+    image: "/placeholder.svg?height=300&width=300",
+    images: ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"],
+    description: "Premium cashew fudge with silver foil. A traditional Indian sweet perfect for celebrations.",
+    ingredients: "Cashews, Sugar, Ghee, Cardamom, Silver Foil",
+    weight: "250g",
+    inStock: true,
+    rating: 4.8,
+    reviews: 145,
+    featured: true,
+    tags: ["premium", "vegetarian", "festive"],
+  },
+  {
+    id: 9,
+    name: "Gulab Jamun",
+    category: "sweets",
+    price: 80,
+    originalPrice: 90,
+    image: "/placeholder.svg?height=300&width=300",
+    images: ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"],
+    description: "Soft and spongy milk dumplings soaked in aromatic sugar syrup. A beloved Indian dessert.",
+    ingredients: "Milk Powder, Flour, Ghee, Sugar, Cardamom, Rose Water",
+    weight: "500g",
+    inStock: true,
+    rating: 4.5,
+    reviews: 112,
+    featured: false,
+    tags: ["traditional", "vegetarian", "sweet"],
+  },
+
+  // Healthy Category
+  {
+    id: 10,
+    name: "Roasted Almonds",
+    category: "healthy",
+    price: 150,
+    originalPrice: 170,
+    image: "/placeholder.svg?height=300&width=300",
+    images: ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"],
+    description: "Premium roasted almonds with a light salt seasoning. Rich in protein and healthy fats.",
+    ingredients: "Almonds, Salt",
+    weight: "200g",
+    inStock: true,
+    rating: 4.6,
+    reviews: 89,
+    featured: true,
+    tags: ["healthy", "protein", "premium", "vegetarian"],
+  },
+  {
+    id: 11,
+    name: "Mixed Dry Fruits",
+    category: "healthy",
+    price: 200,
+    originalPrice: 220,
+    image: "/placeholder.svg?height=300&width=300",
+    images: ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"],
+    description: "A premium mix of cashews, almonds, raisins, and pistachios. Perfect healthy snacking option.",
+    ingredients: "Cashews, Almonds, Raisins, Pistachios, Dates",
+    weight: "300g",
+    inStock: true,
+    rating: 4.7,
+    reviews: 134,
+    featured: true,
+    tags: ["healthy", "premium", "mixed", "vegetarian"],
+  },
+
+  // Additional products for variety
+  {
+    id: 12,
+    name: "Spicy Peanuts",
+    category: "namkeen",
+    price: 30,
+    originalPrice: 35,
+    image: "/placeholder.svg?height=300&width=300",
+    images: ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"],
+    description: "Crunchy peanuts coated with spicy masala. Perfect accompaniment for evening tea.",
+    ingredients: "Peanuts, Gram Flour, Red Chili Powder, Salt, Turmeric, Oil",
+    weight: "100g",
+    inStock: true,
+    rating: 4.3,
+    reviews: 78,
+    featured: false,
+    tags: ["spicy", "vegetarian", "crunchy"],
+  },
+]
+
+export const featuredProducts = products.filter((product) => product.featured)
+
+export const getProductsByCategory = (category) => {
+  return products.filter((product) => product.category === category)
+}
+
+export const getProductById = (id) => {
+  return products.find((product) => product.id === Number.parseInt(id))
+}
+
+export const searchProducts = (query) => {
+  const lowercaseQuery = query.toLowerCase()
+  return products.filter(
+    (product) =>
+      product.name.toLowerCase().includes(lowercaseQuery) ||
+      product.description.toLowerCase().includes(lowercaseQuery) ||
+      product.tags.some((tag) => tag.toLowerCase().includes(lowercaseQuery)),
+  )
+}
+
+// Single source of truth for Shop/Home display built from images in /public
+// Edit names and pricePerPacket here to update everywhere.
+export const imageCatalog = [
+  // JPEGs
+  { src: "/IMG-20250815-WA0049.jpg", name: "Masala Chana (Small packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0050.jpg", name: "Moong Dal (Small packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0051.jpg", name: "Simply Salted Peanuts (Small packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0052.jpg", name: "Hot N Spicy Mixture (Small packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0053.jpg", name: "Moong Dal (Big packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0054.jpg", name: "Green Peas (Big packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0055.jpg", name: "Nut Cracker (Big packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0056.jpg", name: "Green Peas (Small packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0057.jpg", name: "Cheese Tomato Flavoured Peanuts ", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0058.jpg", name: "Masala Sing (Small packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0059.jpg", name: "Masala Sing (Big packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0060.jpg", name: "Mexican Chilly Flavoured Peanuts", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0061.jpg", name: "Hing Jeera Sing (Big packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0062.jpg", name: "Simply Salted Peanuts (Big packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0063.jpg", name: "Peri Peri Flavoured Peanuts", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0064.jpg", name: "Roasted Peanuts (Small packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0065.jpg", name: "Chana Jor Garam (Big packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0066.jpg", name: "Masala Chana (Big packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0067.jpg", name: "Nut Cracker (Small packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0068.jpg", name: "Punjabi Tadka Flavoured Peanuts", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0069.jpg", name: "Salt N'Pepper peanuts (Big packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0070.jpg", name: "Garlic Sev (Small packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0071.jpg", name: "Hing Jeera Flavoured Peanuts", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0072.jpg", name: "Chana Dal (Small packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0073.jpg", name: "Butter Salted Flavoured Peanuts", pricePerPacket: 20 },
+]
