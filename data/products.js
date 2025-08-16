@@ -274,4 +274,5 @@ export const imageCatalog = [
   { src: "/IMG-20250815-WA0071.jpg", name: "Hing Jeera Flavoured Peanuts", pricePerPacket: 20 },
   { src: "/IMG-20250815-WA0072.jpg", name: "Chana Dal (Small packet)", pricePerPacket: 20 },
   { src: "/IMG-20250815-WA0073.jpg", name: "Butter Salted Flavoured Peanuts", pricePerPacket: 20 },
+  { src: "/spicygarlic.jpg", name: "Spicy Garlic Flavoured Peanuts", pricePerPacket: 20 },
 ]
