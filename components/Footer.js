@@ -8,8 +8,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <img src="/logo.png" alt="eteto logo" className="h-24 md:h-28 w-auto" />
+            <div className="flex ">
+              <img src="/logooo.png" alt="eteto logo" className="h-24 md:h-28 w-auto" />
+            </div>
+            <div className="text-4">
+              <div className="font-medium">GUJARAT SNACKS COMPANY</div>
+              <div className="text-sm text-muted-foreground">RAJKOT MAHARASHTRA INDIA</div>
             </div>
             <p className="text-muted-foreground text-sm">
               Bringing you the finest Indian snacks with authentic flavors and premium quality.

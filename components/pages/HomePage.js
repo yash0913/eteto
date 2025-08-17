@@ -42,22 +42,22 @@ export default function HomePage() {
 
   // Hero slideshow
   const desktopSlides = [
-    "/slide1.png",
-    "/frontimg.png",
-    "/slide3.png",
-    "/slide4.png",
-    "/slide5.png",
+    "/slide1.jpg",
+    "/frontimg.jpg",
+    "/slide3.jpg",
+    "/slide4.jpg",
+    "/slide5.jpg",
     "/slide6r.png",
     "/slide7.png",
   ]
   const mobileSlides = [
-    "/slide1mob.png",
-    "/slide2.png",
-    "/slide3mob.png",
-    "/slide4mob.png",
-    "/slide5mob.png",
-    "/slide6rmob.png",
-    "/slide7mob.png",
+    "/slide1mobb.png",
+    "/frontimgmob.png",
+    "/slide3mob.jpg",
+    "/slide4mob.jpg",
+    "/slide5mob.jpg",
+    "/slide6rmob.jpg",
+    "/slide7mob.jpg",
   ]
   const slides = isMobile ? mobileSlides : desktopSlides
   const [slideIndex, setSlideIndex] = useState(0)
@@ -320,7 +320,7 @@ export default function HomePage() {
               </Button>
             </div>
             <div className="relative">
-              <img src="/frontimg.png" alt="About Eteto" className="w-full rounded-2xl shadow-lg" />
+              <img src="/frontimg.jpg" alt="About Eteto" className="w-full rounded-2xl shadow-lg" />
             </div>
           </div>
         </div>
