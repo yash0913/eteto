@@ -24,6 +24,7 @@ export default function ShopPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [gridColumns, setGridColumns] = useState(1)
   const [quantities, setQuantities] = useState({})
+  const [mrpSelections, setMrpSelections] = useState({})
   const productsPerPage = 12
 
   const {
@@ -58,11 +59,37 @@ export default function ShopPage() {
     return n.includes("flavoured peanuts") || n.includes("salt n'pepper peanuts")
   }
 
-  // Apply search filter to catalog items by name (case-insensitive)
+  // Items that require choosing MRP (5 or 10)
+  const needsMrpChoice = (name) => {
+    const base = (name || "").split("(")[0].trim().toLowerCase()
+    return (
+      base === "masala chana" ||
+      base === "moong dal" ||
+      base === "simply salted peanuts" ||
+      base === "green peas" ||
+      base === "nut cracker" ||
+      base === "masala sing"
+    )
+  }
+
+  // Apply category and search filters to catalog items
+  const categoryParam = (searchParams.get("category") || "").toString()
+  const baseByCategory = (() => {
+    if (categoryParam === "2") {
+      // Jars: show can items only
+      return displayItems.filter((it) => isCanItem(it.name))
+    }
+    if (categoryParam === "1") {
+      // Packets: hide can items
+      return displayItems.filter((it) => !isCanItem(it.name))
+    }
+    return displayItems
+  })()
+
   const normalizedQuery = (searchQuery || "").trim().toLowerCase()
   const filteredItems = normalizedQuery
-    ? displayItems.filter((it) => it.name.toLowerCase().includes(normalizedQuery))
-    : displayItems
+    ? baseByCategory.filter((it) => it.name.toLowerCase().includes(normalizedQuery))
+    : baseByCategory
 
   // Pagination based on images
   const totalPages = Math.ceil(filteredItems.length / productsPerPage)
@@ -76,9 +103,11 @@ export default function ShopPage() {
 
     if (category && category !== selectedCategory) {
       setSelectedCategory(category)
+      setCurrentPage(1)
     }
     if (search && search !== searchQuery) {
       setSearchQuery(search)
+      setCurrentPage(1)
     }
   }, [searchParams, selectedCategory, searchQuery, setSelectedCategory, setSearchQuery])
 
@@ -128,13 +157,16 @@ export default function ShopPage() {
     // Add a lightweight catalog item with price 0 to avoid price displays
     const payload = {
       id: item.id,
-      name: item.name,
+      name: needsMrpChoice(item.name)
+        ? `${item.name} - ${mrpSelections[item.id] || "5"} rupees MRP`
+        : item.name,
       image: item.image,
       price: 0,
       originalPrice: 0,
       description: "",
       weight: "",
       source: "catalog",
+      mrp: needsMrpChoice(item.name) ? (mrpSelections[item.id] || "5") : undefined,
     }
     const qty = Math.max(1, parseInt(quantities[item.id]) || 1)
     addToCart(payload, qty)
@@ -231,34 +263,54 @@ export default function ShopPage() {
                       <Card
                         key={item.id}
                         className={`group overflow-hidden hover:shadow-lg transition-all duration-300 ${
-                          viewMode === "list" ? "flex" : ""
+                          viewMode === "list" ? "flex" : "flex flex-col"
                         }`}
                       >
-                        <div className={`relative overflow-hidden ${viewMode === "list" ? "w-48 shrink-0" : ""}`}>
+                        <div className={`relative overflow-hidden shrink-0 ${viewMode === "list" ? "w-40 sm:w-48 h-36 sm:h-40" : ""}`}>
                           <img
                             src={item.image || "/placeholder.svg"}
                             alt={item.name}
-                            className={`${viewMode === "list" ? "w-full h-full" : "w-full h-48"} object-contain bg-white`}
+                            className={`${viewMode === "list" ? "w-full h-full sm:h-full" : "w-full h-40 sm:h-48 md:h-56"} object-contain bg-white`}
                           />
                         </div>
-                        <CardContent className={`${viewMode === "list" ? "flex-1 p-6" : "p-4"} space-y-2`}>
+                         <CardContent className={`${viewMode === "list" ? "flex-1 p-6" : "p-4"} space-y-2 ${viewMode === "list" ? "" : "flex flex-col h-full"}`}>
                           <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
                             {item.name}
                           </h3>
-                          {isCanItem(item.name) ? (
-                            <>
-                              <div className="text-sm text-muted-foreground">1 Box = 105 Jar/Can</div>
-                              <div className="text-xs text-muted-foreground">Multiple flavours in one box also available</div>
-                            </>
-                          ) : (
-                            <>
-                              <div className="text-sm text-muted-foreground">Pack Size: 1 Box (90 Pattis)</div>
-                              <div className="text-sm text-muted-foreground">Each Patti Contains: 12 Packets</div>
-                              <div className="text-sm text-muted-foreground">Total Packets per Box: 1080 (90 x 12)</div>
-                            </>
+                          <>
+                            <div className="text-sm text-muted-foreground">Pack Size: 1 Box (90 Pattis)</div>
+                            <div className="text-sm text-muted-foreground">Each Patti Contains: 12 Packets</div>
+                            <div className="text-sm text-muted-foreground">Total Packets per Box: 1080 (90 x 12)</div>
+                          </>
+                          {needsMrpChoice(item.name) && (
+                            <div className="pt-1">
+                              <div className="text-sm font-medium text-foreground mb-1">Select MRP</div>
+                              <div className="flex items-center gap-3 flex-nowrap">
+                                <label className="flex items-center gap-1 text-sm text-muted-foreground">
+                                  <input
+                                    type="radio"
+                                    name={`mrp-${item.id}`}
+                                    value="5"
+                                    checked={(mrpSelections[item.id] || "5") === "5"}
+                                    onChange={() => setMrpSelections((prev) => ({ ...prev, [item.id]: "5" }))}
+                                  />
+                                  5 rupees
+                                </label>
+                                <label className="flex items-center gap-1 text-sm text-muted-foreground">
+                                  <input
+                                    type="radio"
+                                    name={`mrp-${item.id}`}
+                                    value="10"
+                                    checked={mrpSelections[item.id] === "10"}
+                                    onChange={() => setMrpSelections((prev) => ({ ...prev, [item.id]: "10" }))}
+                                  />
+                                  10 rupees
+                                </label>
+                              </div>
+                            </div>
                           )}
-                          <div className="pt-2 flex items-center gap-3">
-                            <div className="flex items-center gap-2">
+                          <div className="mt-auto pt-2 flex items-center justify-between gap-2 flex-nowrap w-full">
+                            <div className="flex items-center gap-1.5 shrink-0">
                               <label htmlFor={`qty-${item.id}`} className="text-sm text-muted-foreground">Qty</label>
                               <input
                                 id={`qty-${item.id}`}
@@ -270,10 +322,10 @@ export default function ShopPage() {
                                   const key = item.id
                                   setQuantities((prev) => ({ ...prev, [key]: v }))
                                 }}
-                                className="w-16 h-9 rounded-md border border-slate-300 bg-white px-2 text-sm"
+                                className="w-12 h-9 rounded-md border border-slate-300 bg-white px-2 text-sm"
                               />
                             </div>
-                            <Button size="sm" onClick={() => handleAddToCart(item)}>Add to Cart</Button>
+                            <Button size="sm" className="ml-auto shrink-0" onClick={() => handleAddToCart(item)}>Add to Cart</Button>
                           </div>
                         </CardContent>
                       </Card>

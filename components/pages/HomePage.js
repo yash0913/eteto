@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef, useMemo, useLayoutEffect } from "react"
 import { Link } from "react-router-dom"
 import { ArrowRight, Star, Truck, Shield, Award, X, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "../ui/button"
@@ -25,9 +25,40 @@ export default function HomePage() {
   const [quantities, setQuantities] = useState({})
   const isMobile = useIsMobile()
 
+  // Category slideshow (3 panels, rotates every 25s)
+  const categorySlides = [
+    { color: 'bg-red-500', label: 'Packets', img: '/slide21.png' },
+    { color: 'bg-orange-500', label: 'Jars', img: '/slide22.png' },
+    { color: 'bg-emerald-500', label: 'Our Company', img: '/slide23.png' },
+  ]
+  const [catIdx, setCatIdx] = useState(0)
+  useEffect(() => {
+    const id = setInterval(() => setCatIdx((i) => (i + 1) % categorySlides.length), 4000)
+    return () => clearInterval(id)
+  }, [categorySlides.length])
+  const prevCat = () => setCatIdx((i) => (i - 1 + categorySlides.length) % categorySlides.length)
+  const nextCat = () => setCatIdx((i) => (i + 1) % categorySlides.length)
+  const slideLinks = ["/shop?category=1", "/shop?category=2", "/about"]
+
   // Hero slideshow
-  const desktopSlides = ["/slide1.png", "/frontimg.png", "/slide3.png"]
-  const mobileSlides = ["/slide2.png", "/slide1mob.png", "/slide3.png"]
+  const desktopSlides = [
+    "/slide1.png",
+    "/frontimg.png",
+    "/slide3.png",
+    "/slide4.png",
+    "/slide5.png",
+    "/slide6r.png",
+    "/slide7.png",
+  ]
+  const mobileSlides = [
+    "/slide1mob.png",
+    "/slide2.png",
+    "/slide3mob.png",
+    "/slide4mob.png",
+    "/slide5mob.png",
+    "/slide6rmob.png",
+    "/slide7mob.png",
+  ]
   const slides = isMobile ? mobileSlides : desktopSlides
   const [slideIndex, setSlideIndex] = useState(0)
 
@@ -126,73 +157,111 @@ export default function HomePage() {
         </div>
       </section>
 
-      
+      {/* Label above category slideshow */}
+      <div className="max-w-7xl mx-auto w-full px-6 md:px-12 mt-10 mb-4">
+        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground text-center">Our Bestsellers</h2>
+      </div>
 
-      {/* Featured Products Section */
-      }
-      <section className="py-16 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Featured Products</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Discover our most popular and highly-rated snacks loved by customers across India
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {(showAllFeatured ? imagePanels : imagePanels.slice(0, 8)).map((panel, idx) => {
-              return (
-                <Card key={`${panel.src}-${idx}`} className="group overflow-hidden hover:shadow-lg transition-all duration-300">
-                  <div className="relative overflow-hidden">
+      {/* Category promotional slideshow (hero-like, 15s interval) */}
+      <section className="relative w-full overflow-hidden">
+        <style>{`
+          .panel{ border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,.25); overflow: hidden; }
+        `}</style>
+        {/* Single active panel with controls and dots (like the hero) */}
+        <div className="relative h-[70vh] md:h-[80vh] w-screen bg-transparent overflow-hidden">
+          {/* Active slide */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className={`panel ${categorySlides[catIdx].color} relative w-[86vw] md:w-[72vw] lg:w-[62vw] h-[60vh] md:h-[70vh] transition-all duration-500 ring-4 md:ring-8 ring-white/80 ring-offset-2 md:ring-offset-4 ring-offset-white/50 shadow-[0_30px_80px_rgba(0,0,0,0.45)] drop-shadow-[0_0_25px_rgba(255,255,255,0.35)]`}>
+              <div className="absolute inset-0">
+                {catIdx <= 1 ? (
+                  <Link
+                    to={slideLinks[catIdx]}
+                    aria-label={`Open ${categorySlides[catIdx].label}`}
+                    className="absolute inset-0 block z-10"
+                  >
                     <img
-                      src={panel.src}
-                      alt={panel.name}
-                      className="w-full h-48 object-contain bg-white"
+                      src={categorySlides[catIdx].img}
+                      alt={categorySlides[catIdx].label}
+                      className={`w-full h-full object-contain pointer-events-none`}
                     />
-                  </div>
-                  <CardContent className="p-4 space-y-2">
-                    <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                      {panel.name}
-                    </h3>
-                    {isCanItem(panel.name) ? (
-                      <>
-                        <div className="text-sm text-muted-foreground">1 Box = 105 Jar/Can</div>
-                        <div className="text-xs text-muted-foreground">Multiple flavours in one box also available</div>
-                      </>
-                    ) : (
-                      <>
-                        <div className="text-sm text-muted-foreground">Pack Size: 1 Box (90 Pattis)</div>
-                        <div className="text-sm text-muted-foreground">Each Patti Contains: 12 Packets</div>
-                        <div className="text-sm text-muted-foreground">Total Packets per Box: 1080 (90 x 12)</div>
-                      </>
-                    )}
-                    <div className="pt-2 flex items-center gap-3">
-                      <div className="flex items-center gap-2">
-                        <label htmlFor={`qty-${idx}`} className="text-sm text-muted-foreground">Qty</label>
-                        <input
-                          id={`qty-${idx}`}
-                          type="number"
-                          min={1}
-                          value={quantities[`home-${idx}`] ?? 1}
-                          onChange={(e) => {
-                            const v = Math.max(1, parseInt(e.target.value) || 1)
-                            const key = `home-${idx}`
-                            setQuantities((prev) => ({ ...prev, [key]: v }))
-                          }}
-                          className="w-16 h-9 rounded-md border border-slate-300 bg-white px-2 text-sm"
-                        />
-                      </div>
-                      <Button size="sm" onClick={() => handleAddToCart(panel, idx)}>Add to Cart</Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              )
-            })}
+                  </Link>
+                ) : (
+                  <img
+                    src={categorySlides[catIdx].img}
+                    alt={categorySlides[catIdx].label}
+                    className={`absolute inset-0 w-full h-full object-contain`}
+                  />
+                )}
+              </div>
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white font-extrabold text-xl md:text-2xl drop-shadow text-center">{categorySlides[catIdx].label}</div>
+            </div>
           </div>
-          <div className="text-center mt-8">
-            <Button asChild variant="outline" size="lg">
-              <Link to="/shop">View All Products <ArrowRight className="ml-2 w-5 h-5" /></Link>
+
+          {/* Prev/Next Controls */}
+          <div className="absolute inset-y-0 left-0 right-0 z-30 flex items-center justify-between px-3 pointer-events-none">
+            <Button variant="ghost" size="icon" onClick={prevCat} className="bg-background/60 hover:bg-background/80 pointer-events-auto">
+              <ChevronLeft className="w-5 h-5" />
             </Button>
+            <Button variant="ghost" size="icon" onClick={nextCat} className="bg-background/60 hover:bg-background/80 pointer-events-auto">
+              <ChevronRight className="w-5 h-5" />
+            </Button>
+          </div>
+
+          {/* Dots */}
+          <div className="absolute bottom-6 left-0 right-0 z-10 flex items-center justify-center gap-2">
+            {categorySlides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCatIdx(i)}
+                className={`h-2.5 w-2.5 rounded-full transition-colors ${i === catIdx ? "bg-primary" : "bg-muted"}`}
+                aria-label={`Go to category slide ${i + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Next Page: Become Our Distributor */}
+        <div className="hidden">
+          <div className="absolute inset-6 border-2 border-white rounded-xl pointer-events-none" />
+
+          {/* Left text & CTA */}
+          <div className="max-w-7xl mx-auto w-full px-6 md:px-12 grid md:grid-cols-2 items-center gap-8 z-[1]">
+            <div className="space-y-4">
+              <div className="text-3xl md:text-5xl font-extrabold text-foreground">Become our distributor</div>
+              <p className="text-sm md:text-base text-foreground/80 max-w-prose">
+                Partner with us to bring irresistible snacks to more shelves. Get competitive margins, dedicated support,
+                and a fast-moving catalog consumers love.
+              </p>
+              <Button asChild className="bg-green-600 hover:bg-green-700 text-white rounded-xl">
+                <Link to="/contact">Connect With Us</Link>
+              </Button>
+            </div>
+
+            {/* Claw + hanging packets */}
+            <div className="relative h-[360px] md:h-[460px]">
+              {/* Claw SVG */}
+              <div className="absolute left-1/2 -translate-x-1/2 -top-6 origin-top" style={{ animation: 'sway 4s ease-in-out infinite' }}>
+                <svg width="140" height="160" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="grad" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stopColor="#e5e7eb"/>
+                      <stop offset="100%" stopColor="#9ca3af"/>
+                    </linearGradient>
+                  </defs>
+                  <rect x="66" y="0" width="8" height="50" fill="url(#grad)"/>
+                  <path d="M40 60 L70 50 L100 60 L90 80 L70 75 L50 80 Z" fill="url(#grad)" stroke="#6b7280"/>
+                  <path d="M50 80 Q70 110 55 140" stroke="#6b7280" strokeWidth="8" fill="none"/>
+                  <path d="M90 80 Q70 110 85 140" stroke="#6b7280" strokeWidth="8" fill="none"/>
+                </svg>
+              </div>
+
+              {/* Hero packet held by claw */}
+              <img src="/masalachanaa.png" alt="hero" className="absolute left-1/2 -translate-x-1/2 top-24 w-36 md:w-44 object-contain drop-shadow-2xl" style={{ animation: 'floatSlow 5s ease-in-out infinite' }} />
+
+              {/* Hanging packets like a chain */}
+              <img src="/moongdal.png" alt="hang1" className="absolute left-[40%] top-[58%] w-28 md:w-32 object-contain drop-shadow-xl" style={{ animation: 'floatSlow 6s ease-in-out infinite' }} />
+              <img src="/simplysalted.png" alt="hang2" className="absolute right-[38%] top-[64%] w-28 md:w-32 object-contain drop-shadow-xl" style={{ animation: 'floatSlow 6.5s ease-in-out infinite' }} />
+            </div>
           </div>
         </div>
       </section>

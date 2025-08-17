@@ -62,12 +62,42 @@ export default function CartPage() {
   }
 
   const handleGmail = () => {
+    const to = "gujjusnacsco@gmail.com"
     const subject = "Order Request - eteto"
     const body = buildOrderMessage()
-    const mailto = `mailto:gujjusnacsco@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-    
-    // Prefer the device's default email client (better UX on mobile)
-    window.location.href = mailto
+
+    const enc = encodeURIComponent
+    const ua = typeof navigator !== "undefined" ? navigator.userAgent || "" : ""
+    const isAndroid = /Android/i.test(ua)
+    const isIOS = /iPhone|iPad|iPod/i.test(ua)
+
+    const mailto = `mailto:${to}?subject=${enc(subject)}&body=${enc(body)}`
+    const gmailWeb = `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(to)}&su=${enc(subject)}&body=${enc(body)}`
+
+    // iOS: try Gmail app URL scheme, then fallback to mailto
+    if (isIOS) {
+      const gmailIOS = `googlegmail://co?to=${enc(to)}&subject=${enc(subject)}&body=${enc(body)}`
+      window.location.href = gmailIOS
+      // Fallback if Gmail app not installed
+      setTimeout(() => {
+        window.location.href = mailto
+      }, 500)
+      return
+    }
+
+    // Android: try Gmail intent to app, then fallback to mailto
+    if (isAndroid) {
+      const gmailIntent = `intent://compose?to=${enc(to)}&subject=${enc(subject)}&body=${enc(body)}#Intent;scheme=mailto;package=com.google.android.gm;end`
+      window.location.href = gmailIntent
+      // Fallback to mailto if intent not handled
+      setTimeout(() => {
+        window.location.href = mailto
+      }, 500)
+      return
+    }
+
+    // Desktop: open Gmail Web compose in a new tab
+    window.open(gmailWeb, "_blank")
   }
 
   if (cartItems.length === 0) {

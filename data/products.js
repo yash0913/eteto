@@ -249,30 +249,32 @@ export const searchProducts = (query) => {
 // Edit names and pricePerPacket here to update everywhere.
 export const imageCatalog = [
   // JPEGs
-  { src: "/IMG-20250815-WA0049.jpg", name: "Masala Chana (Small packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0050.jpg", name: "Moong Dal (Small packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0051.jpg", name: "Simply Salted Peanuts (Small packet)", pricePerPacket: 20 },
+  { src: "/masalachanaa.png", name: "Masala Chana (Available in 5 & 10 rupees MRP)", pricePerPacket: 20 },
+  { src: "/moongdal.png", name: "Moong Dal (Available in 5 & 10 rupees MRP)", pricePerPacket: 20 },
+  { src: "/simplysalted.png", name: "Simply Salted Peanuts (Available in 5 & 10 rupees MRP)", pricePerPacket: 20 },
   { src: "/IMG-20250815-WA0052.jpg", name: "Hot N Spicy Mixture (Small packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0053.jpg", name: "Moong Dal (Big packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0054.jpg", name: "Green Peas (Big packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0055.jpg", name: "Nut Cracker (Big packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0056.jpg", name: "Green Peas (Small packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0057.jpg", name: "Cheese Tomato Flavoured Peanuts ", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0058.jpg", name: "Masala Sing (Small packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0059.jpg", name: "Masala Sing (Big packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0060.jpg", name: "Mexican Chilly Flavoured Peanuts", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0061.jpg", name: "Hing Jeera Sing (Big packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0062.jpg", name: "Simply Salted Peanuts (Big packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0063.jpg", name: "Peri Peri Flavoured Peanuts", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0064.jpg", name: "Roasted Peanuts (Small packet)", pricePerPacket: 20 },
+ 
+  { src: "/greenpeas.png", name: "Green Peas (Available in 5 & 10 rupees MRP)", pricePerPacket: 20 },
+  { src: "/nutcracker.png", name: "Nut Cracker (Available in 5 & 10 rupees MRP)", pricePerPacket: 20 },
+  
   { src: "/IMG-20250815-WA0065.jpg", name: "Chana Jor Garam (Big packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0066.jpg", name: "Masala Chana (Big packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0067.jpg", name: "Nut Cracker (Small packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0068.jpg", name: "Punjabi Tadka Flavoured Peanuts", pricePerPacket: 20 },
+  { src: "/masalasing.png", name: "Masala Sing (Available in 5 & 10 rupees MRP)", pricePerPacket: 20 },
   { src: "/IMG-20250815-WA0069.jpg", name: "Salt N'Pepper peanuts (Big packet)", pricePerPacket: 20 },
+
+  { src: "/IMG-20250815-WA0061.jpg", name: "Hing Jeera Sing (Big packet)", pricePerPacket: 20 },
+  
   { src: "/IMG-20250815-WA0070.jpg", name: "Garlic Sev (Small packet)", pricePerPacket: 20 },
-  { src: "/IMG-20250815-WA0071.jpg", name: "Hing Jeera Flavoured Peanuts", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0064.jpg", name: "Roasted Peanuts (Small packet)", pricePerPacket: 20 },
   { src: "/IMG-20250815-WA0072.jpg", name: "Chana Dal (Small packet)", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0057.jpg", name: "Cheese Tomato Flavoured Peanuts ", pricePerPacket: 20 },
+ 
+  { src: "/IMG-20250815-WA0068.jpg", name: "Punjabi Tadka Flavoured Peanuts", pricePerPacket: 20 },
+  
+  { src: "/IMG-20250815-WA0060.jpg", name: "Mexican Chilly Flavoured Peanuts", pricePerPacket: 20 },
+  
+  { src: "/IMG-20250815-WA0063.jpg", name: "Peri Peri Flavoured Peanuts", pricePerPacket: 20 },
+  { src: "/IMG-20250815-WA0071.jpg", name: "Hing Jeera Flavoured Peanuts", pricePerPacket: 20 },
+  
   { src: "/IMG-20250815-WA0073.jpg", name: "Butter Salted Flavoured Peanuts", pricePerPacket: 20 },
   { src: "/spicygarlic.jpg", name: "Spicy Garlic Flavoured Peanuts", pricePerPacket: 20 },
 ]
