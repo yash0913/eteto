@@ -52,7 +52,7 @@ export default function HomePage() {
   ]
   const mobileSlides = [
     "/slide1mobb.png",
-    "/frontimgmob.png",
+    "/frontimgmob.jpg",
     "/slide3mob.jpg",
     "/slide4mob.jpg",
     "/slide5mob.jpg",
