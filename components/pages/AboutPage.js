@@ -67,7 +67,7 @@ export default function AboutPage() {
             </div>
             <div className="relative">
               <img
-                src="/About1.png"
+                src="/about1.png"
                 alt="Traditional Indian kitchen"
                 className="rounded-lg shadow-lg w-full"
               />

@@ -277,11 +277,23 @@ export default function ShopPage() {
                           <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
                             {item.name}
                           </h3>
-                          <>
-                            <div className="text-sm text-muted-foreground">Pack Size: 1 Box (90 Pattis)</div>
-                            <div className="text-sm text-muted-foreground">Each Patti Contains: 12 Packets</div>
-                            <div className="text-sm text-muted-foreground">Total Packets per Box: 1080 (90 x 12)</div>
-                          </>
+                          {[
+                            "Cheese Tomato Flavoured Peanuts",
+                            "Punjabi Tadka Flavoured Peanuts",
+                            "Mexican Chilly Flavoured Peanuts",
+                            "Peri Peri Flavoured Peanuts",
+                            "Hing Jeera Flavoured Peanuts",
+                            "Butter Salted Flavoured Peanuts",
+                            "Spicy Garlic Flavoured Peanuts"
+                          ].includes(item.name.trim()) ? (
+                            <div className="text-sm text-muted-foreground">1 box contains 105 jars</div>
+                          ) : (
+                            <>
+                              <div className="text-sm text-muted-foreground">Pack Size: 1 Box (90 Pattis)</div>
+                              <div className="text-sm text-muted-foreground">Each Patti Contains: 12 Packets</div>
+                              <div className="text-sm text-muted-foreground">Total Packets per Box: 1080 (90 x 12)</div>
+                            </>
+                          )}
                           {needsMrpChoice(item.name) && (
                             <div className="pt-1">
                               <div className="text-sm font-medium text-foreground mb-1">Select MRP</div>
@@ -362,6 +374,22 @@ export default function ShopPage() {
                     </Button>
                   </div>
                 )}
+
+                {/* Category Selector (only '1' and '2', at end) */}
+                <div className="mt-8 flex flex-row flex-wrap gap-2 items-center overflow-x-auto scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent pb-2 justify-center">
+                  <span className="font-semibold mr-2 whitespace-nowrap">Categories:</span>
+                  {["1", "2"].map((cat) => (
+                    <Button
+                      key={`cat-btn-${cat}`}
+                      variant={selectedCategory === cat ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => handleCategoryChange(cat)}
+                      className="whitespace-nowrap"
+                    >
+                      {cat === "1" ? "Packets" : cat === "2" ? "Jars" : cat}
+                    </Button>
+                  ))}
+                </div>
               </>
             )}
           </div>
